@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VIBEFLOW — Курс по вайб-кодингу с Claude Code</title>
+<meta name="description" content="Научитесь создавать сайты и сервисы с помощью ИИ — без опыта в программировании. Курс по вайб-кодингу с Claude Code.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800;900&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ======= ЖИВОЙ ФОН ======= -->
+<div class="bg-scene" aria-hidden="true">
+  <div class="aurora"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="orb orb-4"></div>
+  <div class="grid-floor"></div>
+  <canvas id="stars"></canvas>
+  <div class="noise"></div>
+</div>
+
+<!-- ======= КУРСОР ======= -->
+<div class="cursor-glow" aria-hidden="true"></div>
+
+<!-- ======= НАВИГАЦИЯ ======= -->
+<header class="nav" id="nav">
+  <a class="logo" href="#top">
+    <span class="logo-mark"></span>
+    VIBE<span>FLOW</span>
+  </a>
+  <nav class="nav-links">
+    <a href="#program">Программа</a>
+    <a href="#results">Результаты</a>
+    <a href="#pricing">Цены</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+  <a href="#pricing" class="btn btn-sm magnetic">
+    <span>Занять место</span>
+    <i class="shine"></i>
+  </a>
+  <button class="burger" id="burger" aria-label="Меню"><span></span><span></span></button>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#program">Программа</a>
+  <a href="#results">Результаты</a>
+  <a href="#pricing">Цены</a>
+  <a href="#faq">FAQ</a>
+</div>
+
+<main id="top">
+
+<!-- ======= HERO ======= -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge reveal">
+      <span class="pulse-dot"></span>
+      Старт потока — <b>3 ноября</b> · осталось <b id="seatsLeft">14</b> мест
+    </div>
+
+    <h1 class="hero-title">
+      <span class="line reveal"><span class="word">Пиши</span></span>
+      <span class="line reveal"><span class="word grad-text">промпты,</span></span>
+      <span class="line reveal"><span class="word">а не</span> <span class="word grad-text-2">код</span></span>
+    </h1>
+
+    <p class="hero-sub reveal">
+      Курс по вайб-кодингу с <b>Claude Code</b>. Вы создадите свой первый сайт,
+      сервис и мини-приложение за 3 недели — <em>даже если вчера впервые услышали слово «терминал»</em>.
+    </p>
+
+    <div class="hero-cta reveal">
+      <a href="#pricing" class="btn btn-lg magnetic">
+        <span>Начать кодить вайбово</span>
+        <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="#program" class="btn btn-ghost magnetic"><span>Смотреть программу</span></a>
+    </div>
+
+    <div class="hero-stats reveal">
+      <div class="stat"><b data-count="1200">0</b><span>выпускников</span></div>
+      <div class="stat"><b data-count="94" data-suffix="%">0</b><span>делают проект за первые 2 недели</span></div>
+      <div class="stat"><b style="white-space:nowrap">0 ₽ <small style="font-size:.6em;font-weight:600;color:var(--dim)">— кода руками</small></b><span>опыта в программировании</span></div>
+    </div>
+  </div>
+
+  <!-- Живой терминал -->
+  <div class="terminal glass reveal" id="terminal">
+    <div class="terminal-bar">
+      <i></i><i></i><i></i>
+      <span>claude-code — vibe.session</span>
+    </div>
+    <pre class="terminal-body" id="terminalBody"></pre>
+    <div class="terminal-glow"></div>
+  </div>
+
+  <div class="scroll-hint reveal">
+    <span>листай</span>
+    <i></i>
+  </div>
+</section>
+
+<!-- ======= БЕГУЩАЯ СТРОКА ======= -->
+<div class="marquee-wrap">
+  <div class="marquee">
+    <div class="marquee-track" data-marquee>
+      <span>сайт за вечер</span><b>✦</b>
+      <span>без опыта в коде</span><b>✦</b>
+      <span>Claude Code</span><b>✦</b>
+      <span>ваши идеи → в жизнь</span><b>✦</b>
+      <span>лендинги</span><b>✦</b>
+      <span>боты</span><b>✦</b>
+      <span>сервисы</span><b>✦</b>
+      <span>вайб-кодинг</span><b>✦</b>
+    </div>
+  </div>
+</div>
+
+<!-- ======= БОЛИ / ДЛЯ КОГО ======= -->
+<section class="section" id="who">
+  <div class="section-head">
+    <span class="section-tag reveal">· для кого</span>
+    <h2 class="reveal">Вы узнаёте <span class="grad-text">себя</span> в одной из строк?</h2>
+  </div>
+  <div class="personas">
+    <article class="persona glass reveal" data-tilt>
+      <div class="persona-icon">🎨</div>
+      <h3>Дизайнер / маркетолог</h3>
+      <p>Макеты лежат в Figma годами, а «дойти до разработчика» некогда. Теперь вы собираете прототипы сами — за вечер, в два клика.</p>
+    </article>
+    <article class="persona glass reveal" data-tilt>
+      <div class="persona-icon">🚀</div>
+      <h3>Автор идеи / предприниматель</h3>
+      <p>Сервис или MVP «в голове», но подрядчик просит 500 000 ₽ и месяц. Вы запускаете рабочую версию сами — и тестируете гипотезы за неделю.</p>
+    </article>
+    <article class="persona glass reveal" data-tilt>
+      <div class="persona-icon">🌱</div>
+      <h3>Абсолютный новичок</h3>
+      <p>Никогда не писал(а) код — и не страшно. Слово «терминал» перестанет пугать после первого занятия. Дальше — только практика.</p>
+    </article>
+    <article class="persona glass reveal" data-tilt>
+      <div class="persona-icon">🧑‍💻</div>
+      <h3>Специалист, который устал</h3>
+      <p>Хотите автоматизировать рутину: отчёты, парсеры, дашборды, ботов. ИИ пишет — вы ставите задачи и проверяете результат.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ======= ПРОГРАММА ======= -->
+<section class="section" id="program">
+  <div class="section-head">
+    <span class="section-tag reveal">· программа</span>
+    <h2 class="reveal">3 недели — <span class="grad-text-3">3 живых проекта</span> в портфолио</h2>
+    <p class="section-sub reveal">Никакой «водной» теории олимпиадного уровня. Каждый модуль заканчивается работающим продуктом.</p>
+  </div>
+
+  <div class="weeks">
+    <article class="week glass reveal" data-tilt>
+      <div class="week-num">01</div>
+      <div class="week-body">
+        <h3>Первая встреча с Claude Code</h3>
+        <p>Установка, терминал без страха, первые проекты, базовые промпт-паттерны. Магия: сайт из одного предложения.</p>
+      </div>
+      <div class="week-project">
+        <span>проект</span>
+        <b>Личный лендинг</b>
+      </div>
+    </article>
+    <article class="week glass reveal" data-tilt>
+      <div class="week-num">02</div>
+      <div class="week-body">
+        <h3>Дизайн, вёрстка, анимации</h3>
+        <p>Как объяснять ИИ «красиво»: сетки, типографика, градиенты, анимации. Рефакторинг и итерации без строчки кода.</p>
+      </div>
+      <div class="week-project">
+        <span>проект</span>
+        <b>Сайт с анимациями</b>
+      </div>
+    </article>
+    <article class="week glass reveal" data-tilt>
+      <div class="week-num">03</div>
+      <div class="week-body">
+        <h3>Данные и «мозги» сервиса</h3>
+        <p>Формы, таблицы, сохранение данных, API без боли. Подключаем ИИ-функции прямо в свой продукт.</p>
+      </div>
+      <div class="week-project">
+        <span>проект</span>
+        <b>Мини-сервис</b>
+      </div>
+    </article>
+    <article class="week glass reveal featured" data-tilt>
+      <div class="week-num">★</div>
+      <div class="week-body">
+        <h3>Запуск и монетизация</h3>
+        <p>Публикуем проект в интернете за 10 минут, подключаем домен, считаем деньги. Разбираем ваши идеи вживую.</p>
+      </div>
+      <div class="week-project">
+        <span>результат</span>
+        <b>Проект в интернете</b>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ======= РЕЗУЛЬТАТЫ / ОТЗЫВЫ ======= -->
+<section class="section" id="results">
+  <div class="section-head">
+    <span class="section-tag reveal">· результаты</span>
+    <h2 class="reveal">Люди без кода — <span class="grad-text">реальные продукты</span></h2>
+  </div>
+
+  <div class="reviews">
+    <article class="review glass reveal" data-tilt>
+      <p class="review-text">«Я флорист. За второй поток собрала сайт студии с бронированием — и впервые не просила никого „помочь с компьютером“».</p>
+      <footer><div class="ava" style="--a:#ff5fa2">А</div><div><b>Алина</b><span>флорист, 34</span></div><div class="stars">★★★★★</div></footer>
+    </article>
+    <article class="review glass reveal" data-tilt>
+      <p class="review-text">«Маркетинг-агентство, у меня 0 кода. Сделала дашборд для клиента за 3 вечера. Клиент решил, что мы наняли разработчика».</p>
+      <footer><div class="ava" style="--a:#5fd0ff">М</div><div><b>Марина</b><span>маркетолог, 29</span></div><div class="stars">★★★★★</div></footer>
+    </article>
+    <article class="review glass reveal" data-tilt>
+      <p class="review-text">«Хотел бот для своей группы в Telegram. На курсе сделал его за вечер и ещё продал такой же двум знакомым».</p>
+      <footer><div class="ava" style="--a:#3ee6b0">Д</div><div><b>Дмитрий</b><span>репетитор, 41</span></div><div class="stars">★★★★★</div></footer>
+    </article>
+  </div>
+
+  <div class="numbers">
+    <div class="num glass reveal"><b data-count="94" data-suffix="%">0</b><span>довольны результатом</span></div>
+    <div class="num glass reveal"><b data-count="27">0</b><span>минут — средний первый прототип</span></div>
+    <div class="num glass reveal"><b data-count="100" data-suffix="%">0</b><span>заканчивают с готовым проектом</span></div>
+  </div>
+</section>
+
+<!-- ======= ЦЕНЫ ======= -->
+<section class="section" id="pricing">
+  <div class="section-head">
+    <span class="section-tag reveal">· цены</span>
+    <h2 class="reveal">Выберите свой <span class="grad-text-2">вайб</span></h2>
+    <p class="section-sub reveal">Возврат в течение 14 дней без вопросов. После старта потока 3 ноября цены вырастут.</p>
+  </div>
+
+  <div class="plans">
+    <article class="plan glass reveal" data-tilt>
+      <header>
+        <h3>Самостоятельный</h3>
+        <div class="price"><s>24 900 ₽</s><b>17 900 ₽</b></div>
+      </header>
+      <ul>
+        <li>Все уроки и материалы</li>
+        <li>Чат студентов</li>
+        <li>3 проекта в портфолио</li>
+        <li>Доступ 6 месяцев</li>
+      </ul>
+      <a href="#" class="btn btn-ghost magnetic btn-block"><span>Хочу этот</span></a>
+    </article>
+
+    <article class="plan featured glass reveal" data-tilt>
+      <div class="plan-badge">выбирают 8 из 10</div>
+      <header>
+        <h3>С куратором</h3>
+        <div class="price"><s>39 900 ₽</s><b>29 900 ₽</b></div>
+      </header>
+      <ul>
+        <li>Всё из «Самостоятельного»</li>
+        <li>Разбор ваших проектов вживую</li>
+        <li>Групповые созвоны 2× в неделю</li>
+        <li>Проверка домашних заданий</li>
+        <li>Гарантия результата или возврат</li>
+      </ul>
+      <a href="#" class="btn btn-lg btn-block magnetic"><span>Занять место</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </article>
+
+    <article class="plan glass reveal" data-tilt>
+      <header>
+        <h3>1-на-1</h3>
+        <div class="price"><b>89 900 ₽</b></div>
+      </header>
+      <ul>
+        <li>Всё из «С куратором»</li>
+        <li>6 личных сессий с автором</li>
+        <li>Ваш проект — приоритет №1</li>
+        <li>Помощь с запуском и первым клиентом</li>
+      </ul>
+      <a href="#" class="btn btn-ghost magnetic btn-block"><span>Хочу этот</span></a>
+    </article>
+  </div>
+</section>
+
+<!-- ======= FAQ ======= -->
+<section class="section" id="faq">
+  <div class="section-head">
+    <span class="section-tag reveal">· вопросы</span>
+    <h2 class="reveal">Спрашивают <span class="grad-text-3">перед записью</span></h2>
+  </div>
+  <div class="faq">
+    <details class="glass reveal">
+      <summary>Нужно ли уметь программировать?<i></i></summary>
+      <p>Нет. Курс построен так, что вы вообще не пишете код руками — вы формулируете задачи, Claude Code их реализует. Мы научим говорить с ИИ так, чтобы он понимал вас с первого раза.</p>
+    </details>
+    <details class="glass reveal">
+      <summary>Что мне понадобится?<i></i></summary>
+      <p>Компьютер (Mac или Windows), интернет и 3–5 часов в неделю. Все инструменты бесплатные или мы покажем, как обойтись без платных.</p>
+    </details>
+    <details class="glass reveal">
+      <summary>Сколько времени занимает курс?<i></i></summary>
+      <p>3 недели. Каждый модуль — это один вечер теории + практика над вашим проектом. Уроки остаются с вами, можно смотреть в своём темпе.</p>
+    </details>
+    <details class="glass reveal">
+      <summary>А если не получится?<i></i></summary>
+      <p>Куратор разберёт ваш проект лично, а если через 14 дней вы поймёте, что это не ваше, — вернём деньги целиком. Без вопросов и форм.</p>
+    </details>
+    <details class="glass reveal">
+      <summary>Claude Code — это платно?<i></i></summary>
+      <p>Есть бесплатный тариф, которого хватает на всё обучение. Мы покажем, как настроить всё с нуля на первом занятии.</p>
+    </details>
+  </div>
+</section>
+
+<!-- ======= CTA ======= -->
+<section class="section final">
+  <div class="final-card glass reveal">
+    <div class="final-glow"></div>
+    <h2>Ваш первый сайт —<br><span class="grad-text">уже на этой неделе</span></h2>
+    <p>Через 21 день у вас будет проект в интернете и навык, который останется навсегда.</p>
+    <a href="#pricing" class="btn btn-lg magnetic"><span>Забрать своё место</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <div class="seats"><span class="pulse-dot"></span> осталось <b>14</b> из 40 мест · старт 3 ноября</div>
+  </div>
+  <footer class="site-footer">
+    <span>© VIBEFLOW 2026 — курс вайб-кодинга</span>
+    <span>сделано с Claude Code · ё, буквально</span>
+  </footer>
+</section>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ meta.title }} — нейросети, Claude Code, промпты</title>
+    <meta name="description" content="Короткие и понятные материалы о нейросетях, Claude Code, промптах и первых проектах. Для тех, кто начинает с нуля.">
+
+    <!-- Сообщаем CSS, что JavaScript включён (нужно для анимаций появления) -->
+    <script>document.documentElement.classList.add("js");</script>
+
+    <!-- Шрифты: Unbounded для заголовков, Manrope для текста -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%2307070c'/><text x='50' y='72' font-size='64' text-anchor='middle' fill='%23c9ff4f'>✦</text></svg>">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body id="top">
+
+    <!-- Фоновые пятна и сетка -->
+    <div class="page-bg" aria-hidden="true">
+        <span class="bg-orb bg-orb--lime"></span>
+        <span class="bg-orb bg-orb--violet"></span>
+        <span class="bg-orb bg-orb--pink"></span>
+        <span class="bg-grid"></span>
+    </div>
+
+    <!-- Мягкое свечение, которое следует за курсором -->
+    <div class="cursor-glow" aria-hidden="true"></div>
+
+    <!-- Полоска прогресса прокрутки -->
+    <div class="scroll-progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+    <header class="site-header" id="siteHeader">
+        <div class="container header-inner">
+            <a class="logo" href="#top" aria-label="AI-дайджест — на главную">
+                <span class="logo-mark" aria-hidden="true">✦</span>
+                <span>ai<span class="logo-slash">/</span>дайджест</span>
+            </a>
+
+            <nav class="main-nav" aria-label="Навигация">
+                <a href="#cards">Материалы</a>
+                <a href="#subscribe">Подписка</a>
+            </nav>
+
+            <a class="btn btn-primary btn-small header-cta" href="#subscribe">
+                В дайджест <span aria-hidden="true">✦</span>
+            </a>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- ===== Первый экран ===== -->
+        <section class="hero">
+            <div class="hero-floats" aria-hidden="true">
+                <span class="hero-float hero-float--1">Claude Code</span>
+                <span class="hero-float hero-float--2">промпты</span>
+                <span class="hero-float hero-float--3">первый проект</span>
+                <span class="hero-float hero-float--4">ошибки</span>
+            </div>
+
+            <div class="container hero-inner">
+                <p class="eyebrow">
+                    <span class="eyebrow-dot" aria-hidden="true"></span>
+                    {{ meta.eyebrow }} · {{ meta.note }}
+                </p>
+
+                <h1 class="hero-title">
+                    AI — это не страшно.<br>
+                    <span class="grad-text">Страшно — не начать.</span>
+                </h1>
+
+                <p class="hero-text">
+                    Десять коротких материалов о нейросетях, Claude Code, промптах
+                    и первых проектах. Без курсов на сорок часов — только то,
+                    что можно применить сегодня.
+                </p>
+
+                <div class="hero-actions">
+                    <a class="btn btn-primary" href="#cards">
+                        Смотреть карточки <span aria-hidden="true">↓</span>
+                    </a>
+                    <a class="btn btn-ghost" href="#subscribe">Забрать дайджест</a>
+                </div>
+
+                <ul class="hero-stats">
+                    <li><strong>{{ cards|length }}</strong><span>карточек</span></li>
+                    <li><strong>5–12</strong><span>минут на материал</span></li>
+                    <li><strong>0 ₽</strong><span>без регистрации</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ===== Бегущая строка ===== -->
+        <div class="marquee" aria-hidden="true">
+            <div class="marquee-track">
+                <div class="marquee-group">
+                    <span class="marquee-item">нейросети</span><span class="marquee-star">✦</span>
+                    <span class="marquee-item">Claude Code</span><span class="marquee-star">✦</span>
+                    <span class="marquee-item">промпты</span><span class="marquee-star">✦</span>
+                    <span class="marquee-item">первые проекты</span><span class="marquee-star">✦</span>
+                    <span class="marquee-item">ошибки</span><span class="marquee-star">✦</span>
+                    <span class="marquee-item">MCP</span><span class="marquee-star">✦</span>
+                </div>
+                <div class="marquee-group">
+                    <span class="marquee-item">нейросети</span><span class="marquee-star">✦</span>
+                    <span class="marquee-item">Claude Code</span><span class="marquee-star">✦</span>
+                    <span class="marquee-item">промпты</span><span class="marquee-star">✦</span>
+                    <span class="marquee-item">первые проекты</span><span class="marquee-star">✦</span>
+                    <span class="marquee-item">ошибки</span><span class="marquee-star">✦</span>
+                    <span class="marquee-item">MCP</span><span class="marquee-star">✦</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== Карточки ===== -->
+        <section class="cards-section" id="cards">
+            <div class="container">
+
+                <div class="section-head reveal">
+                    <div>
+                        <p class="section-eyebrow">дайджест</p>
+                        <h2>С чего начать</h2>
+                    </div>
+                    <p class="section-note">
+                        Выбери тему или найди свой вопрос. Каждая карточка —
+                        один материал и пять минут спокойного чтения.
+                    </p>
+                </div>
+
+                <div class="toolbar reveal">
+                    <label class="search-wrap" for="search">
+                        <svg class="search-icon" width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/>
+                            <path d="M16.5 16.5L21 21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        </svg>
+                        <input
+                            id="search"
+                            type="search"
+                            placeholder="Промпты, Claude Code, ошибки…"
+                            autocomplete="off"
+                            aria-label="Поиск по материалам"
+                        >
+                        <kbd aria-hidden="true">/</kbd>
+                    </label>
+
+                    <div class="tag-filters" id="tagFilters" role="group" aria-label="Фильтр по тегам">
+                        <button type="button" class="tag-chip is-active" data-tag="all" aria-pressed="true">
+                            Все <span class="chip-count">{{ cards|length }}</span>
+                        </button>
+                        {% for tag in tags %}
+                        <button type="button" class="tag-chip" data-tag="{{ tag }}" aria-pressed="false">
+                            {{ tag }}
+                        </button>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <p class="results" aria-live="polite">
+                    Показано <strong id="visibleCount">{{ cards|length }}</strong> из {{ cards|length }} материалов
+                </p>
+
+                <div class="cards-grid" id="cardsGrid">
+                    {% for card in cards %}
+                    <article
+                        class="card reveal{% if card.featured %} card--featured{% endif %}"
+                        style="--accent: {{ card.accent }}; --i: {{ loop.index0 }}"
+                        data-tags="{{ card.tags|join('|') }}"
+                    >
+                        <span class="card-watermark" aria-hidden="true">✦</span>
+
+                        <div class="card-top">
+                            <span class="card-num">{{ "%02d"|format(loop.index) }}</span>
+                            <span class="card-cat">{{ card.category }}</span>
+                            {% if card.featured %}
+                            <span class="card-star">Главное</span>
+                            {% endif %}
+                            <span class="card-emoji" aria-hidden="true">{{ card.emoji }}</span>
+                        </div>
+
+                        <div class="card-body">
+                            <h3 class="card-title">{{ card.title }}</h3>
+                            <p class="card-desc">{{ card.description }}</p>
+
+                            <ul class="card-tags" aria-label="Теги материала">
+                                {% for tag in card.tags %}
+                                <li>{{ tag }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                        <div class="card-bottom">
+                            <span class="card-time">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/>
+                                    <path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                                </svg>
+                                {{ card.read_time }}
+                            </span>
+                            <a class="card-open" href="{{ card.link }}" target="_blank" rel="noopener noreferrer">
+                                <span>Открыть материал</span>
+                                <span class="card-open-icon" aria-hidden="true">↗</span>
+                            </a>
+                        </div>
+                    </article>
+                    {% endfor %}
+                </div>
+
+                <div class="empty" id="emptyState" hidden>
+                    <span class="empty-icon" aria-hidden="true">🛰️</span>
+                    <h3>Ничего не нашлось</h3>
+                    <p>Попробуй другой запрос или сбрось фильтры — материалов всего десять.</p>
+                    <button type="button" class="btn btn-ghost" id="resetFilters">Сбросить фильтры</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Подписка ===== -->
+        <section class="subscribe" id="subscribe">
+            <div class="container">
+                <div class="subscribe-panel reveal">
+                    <div class="subscribe-copy">
+                        <p class="section-eyebrow">письмо по пятницам</p>
+                        <h2>Один материал в неделю.<br><span class="grad-text">Ноль воды.</span></h2>
+                        <p class="subscribe-text">
+                            Присылаем одну понятную карточку, один инструмент
+                            и один промпт. Читается за пять минут — применяется
+                            в тот же день.
+                        </p>
+
+                        <form class="subscribe-form" id="subscribeForm" novalidate>
+                            <label class="sr-only" for="email">Твой email</label>
+                            <input
+                                id="email"
+                                name="email"
+                                type="email"
+                                placeholder="you@example.com"
+                                autocomplete="email"
+                                required
+                            >
+                            <button class="btn btn-primary" type="submit">
+                                Хочу в дайджест <span aria-hidden="true">✦</span>
+                            </button>
+                        </form>
+                        <p class="form-note" id="formNote" role="status">
+                            Бесплатно. Без спама. Отписка в один клик.
+                        </p>
+                    </div>
+
+                    <div class="subscribe-art" aria-hidden="true">
+                        <div class="orb">
+                            <div class="orb-core">
+                                <span class="orb-icon">✦</span>
+                                <span class="orb-label">AI<br>дайджест</span>
+                            </div>
+                        </div>
+                        <span class="float-chip float-chip--a">10 карточек</span>
+                        <span class="float-chip float-chip--b">Claude Code</span>
+                        <span class="float-chip float-chip--c">0 ₽</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <a class="logo logo--footer" href="#top">
+                <span class="logo-mark" aria-hidden="true">✦</span>
+                <span>ai<span class="logo-slash">/</span>дайджест</span>
+            </a>
+            <p>Сделано на Flask, Python и любопытстве.</p>
+            <p class="copyright">© <span id="year">2026</span> AI-дайджест</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Курс «Claude Code» — программирование с AI-агентом | ZeroCoder</title>
+<meta name="description" content="Онлайн-курс по Claude Code: научитесь создавать приложения, автоматизировать разработку и работать с AI-агентом в терминале. С 0 до первых проектов за 6 недель.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b0d12;
+  --bg-soft:#101319;
+  --card:#141821;
+  --card-border:#232a38;
+  --text:#f2f4f8;
+  --muted:#9aa3b5;
+  --accent:#d97757;      /* Anthropic-подобный терракотовый */
+  --accent-2:#7c8cff;
+  --accent-3:#4ecdc4;
+  --grad:linear-gradient(135deg,#d97757 0%,#e8967a 50%,#7c8cff 100%);
+  --radius:20px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+  overflow-x:hidden;
+}
+::selection{background:rgba(217,119,87,.4)}
+a{color:inherit;text-decoration:none}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* ---------- Header ---------- */
+header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(11,13,18,.8);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--card-border);
+}
+.nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;letter-spacing:-.5px}
+.logo-mark{
+  width:36px;height:36px;border-radius:10px;
+  background:var(--grad);
+  display:grid;place-items:center;
+  font-family:'JetBrains Mono',monospace;font-weight:600;font-size:16px;color:#0b0d12;
+}
+.nav .logo span em
+.nav .logo span em{font-style:normal;color:var(--accent)}
+.nav-links{display:flex;gap:32px;font-size:15px;color:var(--muted)}
+.nav-links a{transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:12px 24px;border-radius:12px;font-weight:600;font-size:15px;
+  cursor:pointer;border:none;transition:transform .2s,box-shadow .2s,background .2s;
+}
+.btn-primary{
+  background:var(--grad);color:#fff;
+  box-shadow:0 8px 32px rgba(217,119,87,.35);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(217,119,87,.5)}
+.btn-ghost{
+  background:transparent;color:var(--text);
+  border:1px solid var(--card-border);
+}
+.btn-ghost:hover{background:var(--card)}
+
+/* ---------- Hero ---------- */
+.hero{
+  position:relative;
+  padding:96px 0 80px;
+  text-align:center;
+}
+.hero::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(600px 300px at 20% 0%,rgba(217,119,87,.15),transparent),
+    radial-gradient(600px 300px at 80% 10%,rgba(124,140,255,.12),transparent);
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 16px;border-radius:999px;
+  background:rgba(217,119,87,.1);
+  border:1px solid rgba(217,119,87,.3);
+  color:#e8967a;font-size:14px;font-weight:600;
+  margin-bottom:28px;
+}
+.hero-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero h1{
+  font-size:clamp(40px,7vw,76px);
+  font-weight:800;letter-spacing:-2.5px;line-height:1.05;
+  margin-bottom:24px;
+}
+.hero h1 .grad{
+  background:var(--grad);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.hero p.lead{
+  font-size:20px;color:var(--muted);
+  max-width:640px;margin:0 auto 40px;
+}
+.hero-cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:72px}
+.hero .btn{padding:16px 32px;font-size:16px}
+
+/* Terminal mockup */
+.terminal{
+  max-width:820px;margin:0 auto;
+  background:#0d1117;border:1px solid var(--card-border);
+  border-radius:16px;overflow:hidden;
+  box-shadow:0 30px 80px rgba(0,0,0,.5);
+  text-align:left;
+  font-family:'JetBrains Mono',monospace;
+  font-size:14px;
+}
+.terminal-bar{
+  display:flex;align-items:center;gap:8px;
+  padding:12px 16px;background:#161b22;
+  border-bottom:1px solid var(--card-border);
+}
+.terminal-bar .dot{width:12px;height:12px;border-radius:50%}
+.terminal-bar .r{background:#ff5f56}.terminal-bar .y{background:#ffbd2e}.terminal-bar .g{background:#27c93f}
+.terminal-bar .title{margin-left:12px;color:var(--muted);font-size:12px}
+.terminal-body{padding:20px 24px;line-height:1.9;color:#c9d1d9}
+.terminal-body .p{color:var(--accent-3)}
+.terminal-body .cmd{color:var(--text)}
+.terminal-body .out{color:var(--muted)}
+.terminal-body .ok{color:#3fb950}
+.terminal-body .cursor{
+  display:inline-block;width:8px;height:18px;background:var(--accent);
+  vertical-align:middle;animation:blink 1s step-end infinite;
+}
+@keyframes blink{50%{opacity:0}}
+
+/* ---------- Stats ---------- */
+.stats{padding:64px 0;border-top:1px solid var(--card-border);border-bottom:1px solid var(--card-border);background:var(--bg-soft)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
+.stat-num{
+  font-size:44px;font-weight:800;letter-spacing:-1.5px;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.stat-label{color:var(--muted);font-size:15px;margin-top:4px}
+
+/* ---------- Sections ---------- */
+section{padding:96px 0}
+.section-head{max-width:680px;margin:0 auto 56px;text-align:center}
+.section-head .kicker{
+  color:var(--accent);font-weight:700;font-size:14px;
+  text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;
+}
+.section-head h2{font-size:clamp(30px,4.5vw,44px);font-weight:800;letter-spacing:-1.5px;line-height:1.15;margin-bottom:16px}
+.section-head p{color:var(--muted);font-size:18px}
+
+/* Features */
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.feature-card{
+  background:var(--card);border:1px solid var(--card-border);
+  border-radius:var(--radius);padding:32px;
+  transition:transform .25s,border-color .25s;
+}
+.feature-card:hover{transform:translateY(-6px);border-color:rgba(217,119,87,.5)}
+.feature-icon{
+  width:52px;height:52px;border-radius:14px;
+  display:grid;place-items:center;font-size:24px;margin-bottom:20px;
+  background:rgba(217,119,87,.12);
+}
+.feature-card h3{font-size:20px;font-weight:700;margin-bottom:10px;letter-spacing:-.3px}
+.feature-card p{color:var(--muted);font-size:15px}
+
+/* Program */
+.program{background:var(--bg-soft);border-top:1px solid var(--card-border);border-bottom:1px solid var(--card-border)}
+.modules{display:flex;flex-direction:column;gap:16px;max-width:860px;margin:0 auto}
+.module{
+  display:flex;gap:24px;align-items:flex-start;
+  background:var(--card);border:1px solid var(--card-border);
+  border-radius:var(--radius);padding:28px 32px;
+  transition:border-color .25s,transform .25s;
+}
+.module:hover{border-color:rgba(124,140,255,.5);transform:translateX(4px)}
+.module-num{
+  font-family:'JetBrains Mono',monospace;
+  font-size:14px;font-weight:600;color:var(--accent);
+  background:rgba(217,119,87,.1);
+  border:1px solid rgba(217,119,87,.25);
+  padding:6px 12px;border-radius:10px;flex-shrink:0;
+}
+.module h3{font-size:19px;font-weight:700;margin-bottom:6px}
+.module p{color:var(--muted);font-size:15px}
+.module .tag{
+  display:inline-block;margin-top:10px;margin-right:8px;
+  padding:4px 12px;border-radius:999px;
+  background:rgba(124,140,255,.12);color:#a5b0ff;
+  font-size:12.5px;font-weight:600;
+}
+
+/* Pricing */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch}
+.price-card{
+  background:var(--card);border:1px solid var(--card-border);
+  border-radius:var(--radius);padding:36px 32px;
+  display:flex;flex-direction:column;
+  transition:transform .25s;
+}
+.price-card:hover{transform:translateY(-6px)}
+.price-card.highlight{
+  background:linear-gradient(180deg,rgba(217,119,87,.12),rgba(217,119,87,.03)),var(--card);
+  border-color:rgba(217,119,87,.6);
+  position:relative;
+}
+.price-card .pop{
+  position:absolute;top:-14px;left:50%;transform:translateX(-50%);
+  background:var(--grad);color:#fff;font-size:12.5px;font-weight:700;
+  padding:5px 16px;border-radius:999px;white-space:nowrap;
+}
+.price-card h3{font-size:18px;font-weight:700;color:var(--muted);margin-bottom:8px}
+.price-value{font-size:44px;font-weight:800;letter-spacing:-1.5px;margin-bottom:4px}
+.price-value small{font-size:16px;color:var(--muted);font-weight:500;letter-spacing:0}
+.price-old{color:var(--muted);text-decoration:line-through;font-size:15px;margin-bottom:20px}
+.price-card ul{list-style:none;margin:0 0 28px;flex:1}
+.price-card li{
+  display:flex;gap:10px;align-items:flex-start;
+  color:var(--muted);font-size:15px;padding:7px 0;
+}
+.price-card li::before{content:"✓";color:var(--accent);font-weight:700;flex-shrink:0}
+.price-card li.no{opacity:.45}
+.price-card li.no::before{content:"—"}
+.price-card .btn{width:100%}
+
+/* Mentors */
+.mentors-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.mentor{
+  display:flex;gap:20px;align-items:center;
+  background:var(--card);border:1px solid var(--card-border);
+  border-radius:var(--radius);padding:28px;
+}
+.mentor-avatar{
+  width:72px;height:72px;border-radius:50%;flex-shrink:0;
+  display:grid;place-items:center;font-size:28px;font-weight:800;color:#0b0d12;
+  background:var(--grad);
+}
+.mentor h3{font-size:18px;font-weight:700;margin-bottom:4px}
+.mentor .role{color:var(--accent);font-size:14px;font-weight:600;margin-bottom:6px}
+.mentor p{color:var(--muted);font-size:14px}
+
+/* FAQ */
+.faq{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+details{
+  background:var(--card);border:1px solid var(--card-border);
+  border-radius:16px;overflow:hidden;
+  transition:border-color .2s;
+}
+details[open]{border-color:rgba(217,119,87,.4)}
+summary{
+  padding:20px 24px;cursor:pointer;font-weight:600;font-size:16px;
+  list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;
+}
+summary::-webkit-details-marker{display:none}
+summary::after{
+  content:"+";font-size:22px;color:var(--accent);transition:transform .2s;flex-shrink:0;
+}
+details[open] summary::after{transform:rotate(45deg)}
+details .answer{padding:0 24px 20px;color:var(--muted);font-size:15px}
+
+/* CTA banner */
+.cta-banner{
+  background:
+    radial-gradient(400px 200px at 15% 50%,rgba(217,119,87,.25),transparent),
+    radial-gradient(400px 200px at 85% 50%,rgba(124,140,255,.2),transparent),
+    var(--card);
+  border:1px solid var(--card-border);
+  border-radius:28px;
+  padding:64px 40px;text-align:center;
+}
+.cta-banner h2{font-size:clamp(28px,4vw,40px);font-weight:800;letter-spacing:-1px;margin-bottom:16px}
+.cta-banner p{color:var(--muted);font-size:17px;margin-bottom:32px}
+
+/* Footer */
+footer{border-top:1px solid var(--card-border);padding:56px 0 40px;background:var(--bg-soft)}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
+.footer-grid h4{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:16px}
+.footer-grid a{display:block;color:var(--muted);font-size:15px;padding:5px 0;transition:color .2s}
+.footer-grid a:hover{color:var(--text)}
+.footer-desc{color:var(--muted);font-size:14px;max-width:300px;margin-top:12px}
+.footer-logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;letter-spacing:-.5px;margin-bottom:4px}
+.footer-bottom{
+  display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;
+  padding-top:24px;border-top:1px solid var(--card-border);
+  color:var(--muted);font-size:14px;
+}
+
+@media(max-width:960px){
+  .features-grid,.pricing-grid{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:repeat(2,1fr);gap:40px}
+  .mentors-grid,.footer-grid{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .module{flex-direction:column;gap:12px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a href="#" class="logo"><div class="logo-mark">>_</div><span>Zero<em>Coder</em></span></a>
+    <nav class="nav-links">
+      <a href="#program">Программа</a>
+      <a href="#features">Что вы получите</a>
+      <a href="#mentors">Преподаватели</a>
+      <a href="#pricing">Тарифы</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a href="#pricing" class="btn btn-primary">Записаться на курс</a>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge"><span class="dot"></span> Набор на поток открыт · старт 3 ноября</div>
+    <h1>Кодинг будущего:<br><span class="grad">Claude Code</span></h1>
+    <p class="lead">Научитесь создавать полноценные приложения, сайты и автоматизации вместе с AI-агентом прямо в терминале. Без многолетнего опыта в разработке — с нуля до первых работающих проектов за 6 недель.</p>
+    <div class="hero-cta">
+      <a href="#pricing" class="btn btn-primary">Записаться за 4 900 ₽</a>
+      <a href="#program" class="btn btn-ghost">Смотреть программу ↓</a>
+    </div>
+
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="title"> Terminal — claude</span>
+      </div>
+      <div class="terminal-body">
+        <div><span class="p">❯</span> <span class="cmd">claude "создай лендинг для кофейни с тёмной темой"</span></div>
+        <div class="out">✻ Анализирую задачу… создаю index.html, styles.css, script.js</div>
+        <div><span class="ok">✔</span> <span class="out">Готово: 3 файла изменено, адаптивная вёрстка, SEO-разметка</span></div>
+        <div><span class="p">❯</span> <span class="cmd">claude "добавь форму бронирования столика и отправку в Telegram"</span></div>
+        <div class="out">✻ Правлю разметку… подключаю Bot API… добавляю валидацию</div>
+        <div><span class="ok">✔</span> <span class="out">Готово: форма работает, тесты пройдены</span></div>
+        <div><span class="p">❯</span> <span class="cursor"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<section class="stats">
+  <div class="container stats-grid">
+    <div><div class="stat-num">6 нед.</div><div class="stat-label">длительность курса</div></div>
+    <div><div class="stat-num">12</div><div class="stat-label">модулей и 24 практики</div></div>
+    <div><div class="stat-num">4 900 ₽</div><div class="stat-label">стартовая цена</div></div>
+    <div><div class="stat-num">15 000+</div><div class="stat-label">студентов уже с нами</div></div>
+  </div>
+</section>
+
+<!-- Features -->
+<section id="features">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">Почему Claude Code</div>
+      <h2>Один AI-агент — вместо целого стека инструментов</h2>
+      <p>Claude Code работает прямо в вашем терминале: читает кодовую базу, пишет файлы, запускает команды и доводит задачи до конца.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Разработка в 10 раз быстрее</h3>
+        <p>Формулируйте задачу словами — агент спроектирует, напишет и протестирует код. Вы контролируете результат, а не боретесь с синтаксисом.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🧠</div>
+        <h3>Понимает весь проект</h3>
+        <p>Агент видит структуру репозитория, находит нужные файлы и вносит изменения, не ломая остальной код. Никакого копирования в чат-бот.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🛠</div>
+        <h3>Действует по-настоящему</h3>
+        <p>Редактирует файлы, запускает команды, делает коммиты в git и подключается к MCP-серверам — от базы данных до браузера.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h3>Для новичков и профи</h3>
+        <p>Новичок соберёт первый сайт за первый вечер. Опытный разработчик снимет с себя рутину и сосредоточится на архитектуре.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💼</div>
+        <h3>Востребованный навык</h3>
+        <p>AI-ассистированная разработка — главный тренд 2026 года. Компании ищут людей, которые умеют эффективно работать с агентами.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🚀</div>
+        <h3>Портфолио с первого дня</h3>
+        <p>Каждый модуль заканчивается готовым проектом: сайт, бот, автоматизация. К финалу у вас — 5+ работ в портфолио.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Program -->
+<section id="program" class="program">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">Программа курса</div>
+      <h2>6 недель · 12 модулей · путь от «hello world» до собственных продуктов</h2>
+      <p>Теория — короткими дозами, практика — каждый день. Все задания проверяет и комментирует AI-ревьюер, а кураторы отвечают в чате 24/7.</p>
+    </div>
+    <div class="modules">
+      <div class="module">
+        <div class="module-num">01</div>
+        <div>
+          <h3>Знакомство с Claude Code</h3>
+          <p>Установка, настройка окружения, первые команды. Учимся formulations задач, которые агент понимает с первого раза.</p>
+          <span class="tag">2 урока</span><span class="tag">Проект: первый сайт за вечер</span>
+        </div>
+      </div>
+      <div class="module">
+        <div class="module-num">02</div>
+        <div>
+          <h3>Основы веб-разработки через агента</h3>
+          <p>HTML, CSS и JavaScript — без зубрёжки. Разбираем код, который генерирует агент, и учимся его осознанно менять.</p>
+          <span class="tag">4 урока</span><span class="tag">Проект: личная страница-визитка</span>
+        </div>
+      </div>
+      <div class="module">
+        <div class="module-num">03</div>
+        <div>
+          <h3>Работа с репозиторием и git</h3>
+          <p>Клонируем проекты, вносим правки, делаем коммиты и pull request'ы силами агента. Осваиваем безопасный рефакторинг.</p>
+          <span class="tag">2 урока</span><span class="tag">Проект: open-source contribution</span>
+        </div>
+      </div>
+      <div class="module">
+        <div class="module-num">04</div>
+        <div>
+          <h3>Автоматизация рутины</h3>
+          <p>Скрипты для обработки файлов, парсинга данных, отчётов. Превращаем часовые задачи в команды на одну строку.</p>
+          <span class="tag">2 урока</span><span class="tag">Проект: автоклинер почты и таблиц</span>
+        </div>
+      </div>
+      <div class="module">
+        <div class="module-num">05</div>
+        <div>
+          <h3>Бэкенд и базы данных</h3>
+          <p>API на Node.js, PostgreSQL, развертывание. Агент проектирует схему БД и пишет эндпоинты — вы проверяете логику.</p>
+          <span class="tag">3 урока</span><span class="tag">Проект: REST API с документацией</span>
+        </div>
+      </div>
+      <div class="module">
+        <div class="module-num">06</div>
+        <div>
+          <h3>MCP и расширенные возможности</h3>
+          <p>Подключаем агента к внешним сервисам: браузер, Notion, Stripe. Пишем собственные MCP-серверы и кастомные команды.</p>
+          <span class="tag">3 урока</span><span class="tag">Проект: AI-ассистент под свою задачу</span>
+        </div>
+      </div>
+      <div class="module">
+        <div class="module-num">07</div>
+        <div>
+          <h3>TDD и качество кода</h3>
+          <p>Тесты до кода: агент пишет suite, вы утверждаете контракт. Линтеры, CI/CD на GitHub Actions — всё на автопилоте.</p>
+          <span class="tag">2 урока</span><span class="tag">Проект: приложение с зелёным CI</span>
+        </div>
+      </div>
+      <div class="module">
+        <div class="module-num">08</div>
+        <div>
+          <h3>Дипломный проект</h3>
+          <p>Собственный продукт от идеи до деплоя: SaaS, бот или телеграм-сервис. Защита перед менторами и сертификат.</p>
+          <span class="tag">2 недели</span><span class="tag">Проект: готовый продукт в портфолио</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Mentors -->
+<section id="mentors">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">Преподаватели</div>
+      <h2>Практики, которые каждый день пишут код с AI</h2>
+    </div>
+    <div class="mentors-grid">
+      <div class="mentor">
+        <div class="mentor-avatar">АК</div>
+        <div>
+          <h3>Артём Ковалёв</h3>
+          <div class="role">Ведущий курса · ex-Tech Lead</div>
+          <p>12 лет в разработке, последний 3 года — полностью AI-assisted стек. Перевёл свою команду на работу с агентами и сократил time-to-market вдвое.</p>
+        </div>
+      </div>
+      <div class="mentor">
+        <div class="mentor-avatar">МС</div>
+        <div>
+          <h3>Мария Соколова</h3>
+          <div class="role">Наставник · Fullstack-разработчик</div>
+          <p>Провела 40+ воркшопов по AI-инструментам. Специализация — помогать новичкам переходить от «агент, сделай всё» к осознанной разработке.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section id="pricing" class="program">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">Тарифы</div>
+      <h2>Выберите свой формат обучения</h2>
+      <p>Рассрочка от 408 ₽/мес. Первые 7 дней — полный возврат без вопросов.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <h3>Базовый</h3>
+        <div class="price-value">4 900 ₽</div>
+        <div class="price-old">9 800 ₽</div>
+        <ul>
+          <li>24 видеоурока, доступ на 1 год</li>
+          <li>Практики с AI-ревьюером</li>
+          <li>Чат студентов</li>
+          <li class="no">Проверка диплома наставником</li>
+          <li class="no">Сертификат</li>
+        </ul>
+        <a href="#" class="btn btn-ghost">Выбрать тариф</a>
+      </div>
+      <div class="price-card highlight">
+        <div class="pop">Популярный выбор</div>
+        <h3>Оптимальный</h3>
+        <div class="price-value">12 900 ₽</div>
+        <div class="price-old">25 800 ₽</div>
+        <ul>
+          <li>Всё из тарифа «Базовый»</li>
+          <li>Проверка дипломного проекта</li>
+          <li>4 личные консультации с наставником</li>
+          <li>Именной сертификат</li>
+          <li>Доступ навсегда</li>
+        </ul>
+        <a href="#" class="btn btn-primary">Записаться на курс</a>
+      </div>
+      <div class="price-card">
+        <h3>Про</h3>
+        <div class="price-value">29 900 ₽</div>
+        <div class="price-old">49 800 ₽</div>
+        <ul>
+          <li>Всё из тарифа «Оптимальный»</li>
+          <li>Индивидуальный трек 1-на-1</li>
+          <li>Разбор вашего кода еженедельно</li>
+          <li>Помощь с первым заказом / наймом</li>
+          <li>Резюме-ревью и подготовка к собесу</li>
+        </ul>
+        <a href="#" class="btn btn-ghost">Выбрать тариф</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">FAQ</div>
+      <h2>Частые вопросы</h2>
+    </div>
+    <div class="faq">
+      <details open>
+        <summary>Мне нужен опыт в программировании?</summary>
+        <div class="answer">Нет. Курс построен от полного нуля: вы будете понимать и направлять код, который генерирует агент. Базовая компьютерная грамотность — единственное требование.</div>
+      </details>
+      <details>
+        <summary>Нужна ли подписка на Claude?</summary>
+        <div class="answer">Для обучения достаточно бесплатного тарифа — на курсе разбираем оба варианта (подписка Pro и оплата по API). Мы покажем, как управлять расходами и попадать в лимиты.</div>
+      </details>
+      <details>
+        <summary>Сколько времени займёт обучение в неделю?</summary>
+        <div class="answer">4–6 часов. Уроки короткие (10–15 минут), основное время — практика с агентом. Вечер в неделю вполне достаточен для комфортного темпа.</div>
+      </details>
+      <details>
+        <summary>Останутся ли у меня проекты после курса?</summary>
+        <div class="answer">Да, все проекты остаются у вас: сайт-визитка, REST API, автоматизации и диплом. Это полноценное портфолио для первых заказов или трудоустройства.</div>
+      </details>
+      <details>
+        <summary>Что если курс мне не подойдёт?</summary>
+        <div class="answer">В течение 7 дней после старта вернём деньги полностью, без вопросов и объяснений.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section>
+  <div class="container">
+    <div class="cta-banner">
+      <h2>Начните писать код с агентом уже на этой неделе</h2>
+      <p>Первый модуль открывается сразу после записи. Старт потока — 3 ноября.</p>
+      <a href="#pricing" class="btn btn-primary" style="padding:16px 40px;font-size:16px">Записаться на курс Claude Code</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo"><div class="logo-mark">>_</div><span>Zero<em>Coder</em></span></div>
+        <div class="footer-desc">Онлайн-школа программирования нового поколения. Учим создавать продукты вместе с AI — быстро, по-практически и без воды.</div>
+      </div>
+      <div>
+        <h4>Курс</h4>
+        <a href="#program">Программа</a>
+        <a href="#pricing">Тарифы</a>
+        <a href="#faq">Вопросы</a>
+      </div>
+      <div>
+        <h4>Компания</h4>
+        <a href="#">О нас</a>
+        <a href="#">Блог</a>
+        <a href="#">Контакты</a>
+      </div>
+      <div>
+        <h4>Правовое</h4>
+        <a href="#">Оферта</a>
+        <a href="#">Политика конфиденциальности</a>
+        <a href="#">Возврат средств</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 ZeroCoder. Все права защищены.</span>
+      <span>hello@zerocoder.ru</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

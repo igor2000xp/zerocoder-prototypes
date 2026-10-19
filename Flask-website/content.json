@@ -1,0 +1,119 @@
+{
+  "meta": {
+    "title": "AI-дайджест для новичков",
+    "eyebrow": "выпуск №01",
+    "note": "обновляем каждую пятницу"
+  },
+  "cards": [
+    {
+      "title": "Как нейросеть угадывает следующее слово",
+      "description": "Разбираем главное без математики: почему большая языковая модель — это не «ум», а очень хороший предсказатель. После этой карточки перестаёшь бояться терминов.",
+      "link": "https://www.youtube.com/watch?v=aircAruvnKk",
+      "tags": ["Нейросети", "База"],
+      "category": "Старт",
+      "emoji": "🧠",
+      "read_time": "6 мин",
+      "accent": "#c9ff4f",
+      "featured": true
+    },
+    {
+      "title": "Claude Code: первый AI-напарник в терминале",
+      "description": "Что это за инструмент, как его установить и попросить собрать первую страницу. Пошаговый старт, даже если терминал раньше только пугал.",
+      "link": "https://www.anthropic.com/claude-code",
+      "tags": ["Claude Code", "Инструменты"],
+      "category": "Инструменты",
+      "emoji": "⚡",
+      "read_time": "10 мин",
+      "accent": "#5ce1ff",
+      "featured": false
+    },
+    {
+      "title": "Промпт, который не придётся переписывать",
+      "description": "Формула «роль → задача → контекст → формат» и пять живых примеров. Забирай шаблон и адаптируй под свои задачи.",
+      "link": "https://www.promptingguide.ai/ru",
+      "tags": ["Промпты", "Практика"],
+      "category": "Практика",
+      "emoji": "✍️",
+      "read_time": "7 мин",
+      "accent": "#b18cff",
+      "featured": false
+    },
+    {
+      "title": "Первый проект: сайт на Flask за вечер",
+      "description": "От пустой папки до страницы в браузере: устанавливаем Flask, пишем десять строк Python и понимаем, как это работает.",
+      "link": "https://flask.palletsprojects.com/en/stable/quickstart/",
+      "tags": ["Проекты", "Flask"],
+      "category": "Проект",
+      "emoji": "🚀",
+      "read_time": "12 мин",
+      "accent": "#ffb15c",
+      "featured": false
+    },
+    {
+      "title": "5 ошибок, которые ломают первый AI-проект",
+      "description": "Слепое доверие ответам, гигантские промпты и отсутствие проверки. Узнай, где новички теряют день, и обойди эти грабли.",
+      "link": "https://www.anthropic.com/engineering/claude-code-best-practices",
+      "tags": ["Ошибки", "База"],
+      "category": "Ошибки",
+      "emoji": "🕳️",
+      "read_time": "8 мин",
+      "accent": "#ff6fae",
+      "featured": false
+    },
+    {
+      "title": "Hugging Face: нейросети без установки",
+      "description": "Бесплатная песочница с готовыми моделями и демо. Пробуем чужие нейросети прямо в браузере и смотрим, как они устроены.",
+      "link": "https://huggingface.co/learn",
+      "tags": ["Инструменты", "Бесплатно"],
+      "category": "Практика",
+      "emoji": "🤗",
+      "read_time": "9 мин",
+      "accent": "#ffe066",
+      "featured": false
+    },
+    {
+      "title": "Промпт-инжиниринг: конспект официального гайда",
+      "description": "Сжали большой гайд OpenAI до семи приёмов: примеры, формат ответа, пошаговые инструкции и работа с ограничениями.",
+      "link": "https://platform.openai.com/docs/guides/prompt-engineering",
+      "tags": ["Промпты", "Гайд"],
+      "category": "Промпты",
+      "emoji": "🎯",
+      "read_time": "6 мин",
+      "accent": "#6ef2c0",
+      "featured": false
+    },
+    {
+      "title": "Google AI Studio за 10 минут",
+      "description": "Площадка, где можно бесплатно сравнить модели, поиграть с картинками и превратить удачный промпт в рабочий код.",
+      "link": "https://aistudio.google.com/",
+      "tags": ["Инструменты", "Бесплатно"],
+      "category": "Инструменты",
+      "emoji": "🧪",
+      "read_time": "8 мин",
+      "accent": "#7dd3fc",
+      "featured": false
+    },
+    {
+      "title": "MCP: дай ассистенту доступ к проекту",
+      "description": "Model Context Protocol простыми словами: зачем он нужен, как подключить файлы и папки и что это меняет в ежедневной работе.",
+      "link": "https://modelcontextprotocol.io/",
+      "tags": ["MCP", "Claude Code", "Проекты"],
+      "category": "Инструменты",
+      "emoji": "🔌",
+      "read_time": "11 мин",
+      "accent": "#9d8cff",
+      "featured": false
+    },
+    {
+      "title": "Куда учиться дальше: карта на 30 дней",
+      "description": "Что изучать после первого проекта: Python, API, RAG и агенты. Маршрут без выгорания и лишних курсов.",
+      "link": "https://roadmap.sh/ai-data-scientist",
+      "tags": ["База", "Проекты"],
+      "category": "Рост",
+      "emoji": "🗺️",
+      "read_time": "5 мин",
+      "accent": "#c9ff4f",
+      "featured": false
+    }
+  ]
+}
