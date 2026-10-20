@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Генератор постов для товаров</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="page">
+
+    <header class="headline">
+      <h1>🛍 Генератор постов</h1>
+      <p class="subtitle">Заполните форму — получите готовый пост для соцсетей</p>
+    </header>
+
+    <!-- Форма поста -->
+    <section class="card">
+      <form method="post">
+
+        <label>
+          Название товара
+          <input type="text" name="name" value="{{ form.name }}" placeholder="Например: Термокружка">
+        </label>
+
+        <label>
+          Описание товара
+          <textarea name="description" rows="4" placeholder="Что это и чем полезно?">{{ form.description }}</textarea>
+        </label>
+
+        {# Сообщение, если описание не заполнено #}
+        {% if error %}
+        <div class="error">⚠️ {{ error }}</div>
+        {% endif %}
+
+        <label>
+          Цена или выгода
+          <input type="text" name="price" value="{{ form.price }}" placeholder="990 ₽, скидка 20%, бесплатная доставка…">
+        </label>
+
+        <label>
+          Настроение поста
+          <select name="mood">
+            {% for value, label in moods.items() %}
+            <option value="{{ value }}" {% if value == form.mood %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+          </select>
+        </label>
+
+        <button type="submit" class="btn">✨ Сформировать пост</button>
+      </form>
+    </section>
+
+    {# Готовый пост — показываем только после генерации #}
+    {% if post %}
+    <section class="card result">
+      <h2>Ваш пост</h2>
+      <div class="post" id="post">{{ post }}</div>
+      <button class="btn btn-copy" id="copyBtn">📋 Скопировать пост</button>
+    </section>
+    {% endif %}
+
+  </main>
+
+  {# Всплывающее сообщение после копирования #}
+  <div class="toast" id="toast">Пост скопирован</div>
+
+  <script>
+    var copyButton = document.getElementById("copyBtn");
+    if (copyButton) {
+      copyButton.addEventListener("click", function () {
+        var text = document.getElementById("post").textContent;
+
+        function showSuccess() {
+          var toast = document.getElementById("toast");
+          toast.classList.add("show");
+          setTimeout(function () { toast.classList.remove("show"); }, 2000);
+        }
+
+        // Основной способ копирования
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(text).then(
+            showSuccess,
+            function () { fallbackCopy(text, showSuccess); }
+          );
+        } else {
+          fallbackCopy(text, showSuccess);
+        }
+      });
+    }
+
+    // Запасной способ для старых браузеров
+    function fallbackCopy(text, onSuccess) {
+      var area = document.createElement("textarea");
+      area.value = text;
+      document.body.appendChild(area);
+      area.select();
+      document.execCommand("copy");
+      document.body.removeChild(area);
+      onSuccess();
+    }
+  </script>
+</body>
+</html>

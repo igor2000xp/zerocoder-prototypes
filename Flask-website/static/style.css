@@ -35,7 +35,6 @@
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 92px;
     overflow-x: clip;
 }
 
@@ -751,14 +750,14 @@ main,
 .tag-filters {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 7px;
 }
 
 .tag-chip {
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    padding: 0.55rem 0.95rem;
+    padding: 0.55rem 0.82rem;
     border: 1px solid var(--line);
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.022);
@@ -829,7 +828,7 @@ main,
     background: linear-gradient(160deg, rgba(21, 21, 34, 0.94), rgba(9, 9, 15, 0.97));
     overflow: hidden;
     isolation: isolate;
-    transition: transform 0.35s var(--ease), border-color 0.35s,
+    transition: transform 0.2s var(--ease), border-color 0.35s,
         box-shadow 0.35s;
 }
 
@@ -1626,17 +1625,24 @@ main,
     .tag-filters {
         flex-wrap: nowrap;
         overflow-x: auto;
-        padding-bottom: 6px;
+        padding: 4px 2px 6px;
         scrollbar-width: none;
         -webkit-overflow-scrolling: touch;
     }
 
     .tag-filters::-webkit-scrollbar {
         display: none;
+        width: 0;
+        height: 0;
     }
 
     .tag-filters .tag-chip {
         flex: 0 0 auto;
+    }
+
+    /* Тень активной кнопки обрезается прокруткой — убираем её */
+    .tag-filters .tag-chip.is-active {
+        box-shadow: none;
     }
 
     .card {

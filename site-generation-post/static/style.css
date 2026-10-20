@@ -1,0 +1,140 @@
+/* Стиль сайта: простой и приятный, без каркасов и библиотек */
+
+:root {
+  --accent: #7c5cff;          /* основной цвет кнопок и заголовков */
+  --accent-dark: #5a3ee0;     /* тёмный вариант для эффекта наведения */
+  --bg-gradient: linear-gradient(135deg, #f5f3ff 0%, #eef6ff 100%);
+  --card: #ffffff;
+  --text: #2b2f3a;
+  --text-soft: #6b7280;
+  --error-bg: #fdecec;
+  --error-text: #b42318;
+  --radius: 14px;
+  --shadow: 0 10px 30px rgba(90, 62, 224, 0.10);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: var(--text);
+  background: var(--bg-gradient);
+  min-height: 100vh;
+}
+
+.page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 40px 16px 80px;
+}
+
+.headline { text-align: center; margin-bottom: 28px; }
+
+h1 {
+  margin: 0 0 6px;
+  font-size: 30px;
+  color: var(--accent-dark);
+}
+
+.subtitle { margin: 0; color: var(--text-soft); }
+
+/* Карточки формы и результата */
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+/* Поля формы */
+label {
+  display: block;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+input, textarea, select {
+  display: block;
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px 12px;
+  font-size: 15px;
+  font-family: inherit;
+  color: var(--text);
+  border: 1.5px solid #e3e4ec;
+  border-radius: 10px;
+  background: #fafafe;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+textarea { resize: vertical; }
+
+input:focus, textarea:focus, select:focus { border-color: var(--accent); }
+
+/* Ошибка валидации */
+.error {
+  background: var(--error-bg);
+  color: var(--error-text);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+/* Кнопки */
+.btn {
+  display: inline-block;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+  color: #fff;
+  background: var(--accent);
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.btn:hover { background: var(--accent-dark); }
+.btn:active { transform: scale(0.98); }
+
+.btn-copy { margin-top: 16px; }
+
+/* Готовый пост */
+.result h2 { margin: 0 0 12px; font-size: 20px; }
+
+.post {
+  white-space: pre-wrap;       /* сохраняем переносы строк поста */
+  background: #f7f6ff;
+  border: 1px dashed #d8d3f7;
+  border-radius: 10px;
+  padding: 16px;
+  line-height: 1.55;
+  font-size: 15px;
+}
+
+/* Всплывающее сообщение «Пост скопирован» */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%) translateY(16px);
+  background: #1f2430;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s, transform 0.25s;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
